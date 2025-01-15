@@ -41,4 +41,7 @@ internal class DalamudApi
     [PluginService] internal static IPluginLog PluginLog { get; private set; } = null!;
 
     [PluginService] internal static ITargetManager TargetManager { get; private set; } = null!;
+
+    [PluginService]
+    internal static INamePlateGui NamePlate { get; private set; } = null!;
 }
