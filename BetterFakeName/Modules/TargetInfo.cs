@@ -100,7 +100,8 @@ internal unsafe class TargetInfo(Configuration configuration) : IUiModule
         if (DalamudApi.TargetManager.Target is { } target && target.ObjectIndex == local.ObjectIndex)
         {
             var targetNameNode = uldManager.NodeList[8]->GetAsAtkTextNode();
-            str = MemoryHelper.ReadStringNullTerminated((IntPtr)targetNameNode->GetText());
+            str = MemoryHelper.ReadStringNullTerminated((IntPtr) targetNameNode->GetText().Value);
+
             if (!string.IsNullOrWhiteSpace(str))
             {
                 var name = Config.Enabled ? Config.Name : local.Name;
@@ -115,7 +116,8 @@ internal unsafe class TargetInfo(Configuration configuration) : IUiModule
         }
 
         var targetsTargetNameNode = uldManager.NodeList[12]->GetAsAtkTextNode();
-        str = MemoryHelper.ReadStringNullTerminated((IntPtr)targetsTargetNameNode->GetText());
+        str = MemoryHelper.ReadStringNullTerminated((IntPtr) targetsTargetNameNode->GetText().Value);
+
         if (!string.IsNullOrWhiteSpace(str))
         {
             str = str.Replace(local.Name.TextValue, Config.Name);
@@ -134,7 +136,7 @@ internal unsafe class TargetInfo(Configuration configuration) : IUiModule
             return;
 
         var targetsTargetNameNode = uldManager.NodeList[10]->GetAsAtkTextNode();
-        var str = MemoryHelper.ReadStringNullTerminated((IntPtr)targetsTargetNameNode->GetText());
+        var str                   = MemoryHelper.ReadStringNullTerminated((IntPtr) targetsTargetNameNode->GetText().Value);
 
         if (!string.IsNullOrWhiteSpace(str))
         {

@@ -1,6 +1,5 @@
-﻿using Dalamud.Game.Addon.Lifecycle;
-using System;
-using System.Runtime.InteropServices;
+﻿using System;
+using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI;
@@ -54,9 +53,12 @@ internal class PartyList(Configuration configuration) : IUiModule
         
         var addon = (AddonPartyList*)args.Addon;
         var localMember = addon->PartyMembers[0];
-        if (MemoryHelper.ReadStringNullTerminated((IntPtr)localMember.Name->GetText()) is not {} name)
+
+        if (MemoryHelper.ReadStringNullTerminated((IntPtr) localMember.Name->GetText().Value) is not { } name)
+        {
             return;
-        
+        }
+
         var whiteSpaceIndex = name.IndexOf(' ');
         if (whiteSpaceIndex != -1)
         {
