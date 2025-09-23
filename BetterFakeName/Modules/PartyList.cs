@@ -1,9 +1,9 @@
 ﻿using System;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI;
-using ImGuiNET;
 
 namespace BetterFakeName.Modules;
 
@@ -50,8 +50,8 @@ internal class PartyList(Configuration configuration) : IUiModule
     {
         if (DalamudApi.ClientState.LocalPlayer is not { } local)
             return;
-        
-        var addon = (AddonPartyList*)args.Addon;
+
+        var addon       = (AddonPartyList*) args.Addon.Address;
         var localMember = addon->PartyMembers[0];
 
         if (MemoryHelper.ReadStringNullTerminated((IntPtr) localMember.Name->GetText().Value) is not { } name)

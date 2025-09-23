@@ -1,9 +1,9 @@
 ﻿using System;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Memory;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using ImGuiNET;
 
 namespace BetterFakeName.Modules;
 
@@ -90,7 +90,7 @@ internal unsafe class TargetInfo(Configuration configuration) : IUiModule
         if (DalamudApi.ClientState.LocalPlayer is not { } local)
             return;
 
-        var addon = (AtkUnitBase*)args.Addon;
+        var addon      = (AtkUnitBase*) args.Addon.Address;
         var uldManager = addon->UldManager;
         if (!addon->IsVisible || uldManager.NodeListCount < 13)
             return;
@@ -130,7 +130,7 @@ internal unsafe class TargetInfo(Configuration configuration) : IUiModule
         if (DalamudApi.ClientState.LocalPlayer is not { } local || DalamudApi.TargetManager.FocusTarget is not { } target || target.ObjectIndex != local.ObjectIndex)
             return;
 
-        var addon = (AtkUnitBase*)args.Addon;
+        var addon      = (AtkUnitBase*) args.Addon.Address;
         var uldManager = addon->UldManager;
         if (!addon->IsVisible || uldManager.NodeListCount < 13)
             return;

@@ -36,9 +36,8 @@ internal class DalamudApi
 
     [PluginService] internal static IGameInteropProvider GameInterop { get; private set; } = null!;
 
-    [PluginService] internal static IGameNetwork GameNetwork { get; private set; } = null!;
-
-    [PluginService] internal static IPluginLog PluginLog { get; private set; } = null!;
+    [PluginService]
+    internal static IPluginLog PluginLog { get; private set; } = null!;
 
     [PluginService] internal static ITargetManager TargetManager { get; private set; } = null!;
 
